@@ -5,6 +5,8 @@ import { SearchBar } from "@/components/SearchBar";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Testimonials } from "@/components/Testimonials";
 import { Footer } from "@/components/Footer";
+import { ProfileContactOptions } from "@/components/ProfileContactOptions";
+import { toast } from "@/components/ui/use-toast";
 
 const featuredServices = [
   {
@@ -52,6 +54,27 @@ const featuredServices = [
 ];
 
 const Index = () => {
+  const handleConnect = () => {
+    toast({
+      title: "Connect request sent",
+      description: "The service provider will be notified of your request.",
+    });
+  };
+
+  const handleBook = () => {
+    toast({
+      title: "Booking initiated",
+      description: "Choose your preferred time slot to schedule the service.",
+    });
+  };
+
+  const handleReview = () => {
+    toast({
+      title: "Review section",
+      description: "Share your experience with this service provider.",
+    });
+  };
+
   return (
     <div className="min-h-screen">
       <HeroSection />
@@ -59,6 +82,14 @@ const Index = () => {
         <SearchBar />
       </div>
       <CategorySection />
+      <section className="py-16 container">
+        <h2 className="text-3xl font-bold text-center mb-8">Contact Options</h2>
+        <ProfileContactOptions
+          onConnect={handleConnect}
+          onBook={handleBook}
+          onReview={handleReview}
+        />
+      </section>
       <HowItWorks />
       <section className="py-16 container relative">
         <div 
