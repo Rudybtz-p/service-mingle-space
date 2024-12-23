@@ -28,6 +28,27 @@ const featuredServices = [
     price: "$30/hr",
     provider: "MathMasters",
   },
+  {
+    title: "International Companion",
+    description: "Professional companionship services with multilingual capabilities.",
+    category: "International",
+    price: "$200/hr",
+    provider: "Global Elite",
+  },
+  {
+    title: "Luxury Date Experience",
+    description: "High-end dining and entertainment companion services.",
+    category: "Dating",
+    price: "$300/hr",
+    provider: "Premium Dating Co.",
+  },
+  {
+    title: "Travel Companion",
+    description: "Professional travel companionship for business or leisure trips.",
+    category: "Travel",
+    price: "$250/hr",
+    provider: "Elite Travel Companions",
+  },
 ];
 
 const Index = () => {
@@ -39,7 +60,11 @@ const Index = () => {
       </div>
       <CategorySection />
       <HowItWorks />
-      <section className="py-16 container">
+      <section className="py-16 container relative">
+        <div 
+          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1500673922987-e212871fec22')] 
+          bg-cover bg-center bg-fixed opacity-10 -z-10"
+        ></div>
         <h2 className="text-3xl font-bold text-center mb-12">Featured Services</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuredServices.map((service) => (
