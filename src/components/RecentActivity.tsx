@@ -11,8 +11,8 @@ const RecentActivity = () => {
         .select(`
           content,
           created_at,
-          sender:sender_id(username),
-          receiver:receiver_id(username)
+          sender:profiles!messages_sender_id_fkey(username),
+          receiver:profiles!messages_receiver_id_fkey(username)
         `)
         .order("created_at", { ascending: false })
         .limit(5);
