@@ -111,6 +111,7 @@ const Login = () => {
               },
             },
           }}
+          theme="light"
         />
       </div>
     </div>
