@@ -1,14 +1,6 @@
 import { Button } from "@/components/ui/button";
 
-const categories = [
-  "Home Services",
-  "Professional",
-  "Education",
-  "Health & Wellness",
-  "Events",
-  "Tech Support",
-  "Escorting",
-];
+const categories = ["Escorting"];
 
 export const CategorySection = () => {
   return (
