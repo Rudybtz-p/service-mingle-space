@@ -94,13 +94,19 @@ const Login = () => {
             },
           }}
           providers={[]}
-          onAuthError={(error) => {
-            console.error('Auth error:', error);
-            if (error.message.includes('Invalid login credentials')) {
-              toast.error('Invalid email or password. Please try again.');
-            } else {
-              toast.error('An error occurred during login. Please try again.');
-            }
+          localization={{
+            variables: {
+              sign_in: {
+                email_input_placeholder: "Your email address",
+                password_input_placeholder: "Your password",
+                email_label: "Email address",
+                password_label: "Password",
+                button_label: "Sign in",
+                loading_button_label: "Signing in ...",
+                social_provider_text: "Sign in with {{provider}}",
+                link_text: "Already have an account? Sign in",
+              },
+            },
           }}
         />
       </div>
