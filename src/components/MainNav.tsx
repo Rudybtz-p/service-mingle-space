@@ -47,7 +47,7 @@ export function MainNav() {
                 <ListItem
                   key={component.title}
                   title={component.title}
-                  href={component.href}
+                  to={component.href}
                 >
                   {component.description}
                 </ListItem>
@@ -68,13 +68,14 @@ export function MainNav() {
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a"> & { to: string }
+>(({ className, title, children, to, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
         <Link
           ref={ref}
+          to={to}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
