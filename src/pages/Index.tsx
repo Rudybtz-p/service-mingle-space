@@ -42,12 +42,12 @@ const featuredServices = [
     providerType: "provider"
   },
   {
-    title: "Luxury Date Experience",
-    description: "High-end dining and entertainment companion services.",
-    category: "Dating",
-    price: "$300/hr",
-    provider: "Premium Dating Co.",
-    providerType: "provider"
+    title: "Couple Dance Classes",
+    description: "Private dance lessons for couples - from beginners to advanced.",
+    category: "Dance",
+    price: "$80/hr",
+    provider: "Dance Together",
+    providerType: "couple"
   },
   {
     title: "Travel Companion",

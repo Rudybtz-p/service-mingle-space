@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { Crown, User, UserCog } from "lucide-react";
+import { Crown, User, UserCog, Users } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface UserTypeIndicatorProps {
@@ -18,6 +18,11 @@ export const UserTypeIndicator = ({ userType, showLabel = true }: UserTypeIndica
       icon: UserCog,
       label: "Service Provider",
       variant: "secondary" as const,
+    },
+    couple: {
+      icon: Users,
+      label: "Couple",
+      variant: "default" as const,
     },
     client: {
       icon: User,
