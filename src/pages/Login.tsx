@@ -67,9 +67,12 @@ const Login = () => {
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log('Auth state changed:', event, session?.user.id);
-      if (session) {
+      console.log('Auth state changed:', event, session?.user?.id);
+      if (event === 'SIGNED_IN' && session) {
         await handleUserSession(session);
+      }
+      if (event === 'USER_DELETED' || event === 'SIGNED_OUT') {
+        navigate('/login');
       }
     });
 
@@ -105,6 +108,9 @@ const Login = () => {
                 loading_button_label: "Signing in ...",
                 social_provider_text: "Sign in with {{provider}}",
                 link_text: "Already have an account? Sign in",
+                error: {
+                  invalid_credentials: "Invalid email or password. Please try again.",
+                }
               },
             },
           }}
