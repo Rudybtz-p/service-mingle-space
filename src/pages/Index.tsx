@@ -1,6 +1,8 @@
 import { HeroSection } from "@/components/HeroSection";
 import { CategorySection } from "@/components/CategorySection";
 import { ServiceCard } from "@/components/ServiceCard";
+import { SearchBar } from "@/components/SearchBar";
+import { HowItWorks } from "@/components/HowItWorks";
 
 const featuredServices = [
   {
@@ -30,8 +32,11 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <HeroSection />
+      <div className="container -mt-8 relative z-10 mb-12">
+        <SearchBar />
+      </div>
       <CategorySection />
-      
+      <HowItWorks />
       <section className="py-16 container">
         <h2 className="text-3xl font-bold text-center mb-12">Featured Services</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
