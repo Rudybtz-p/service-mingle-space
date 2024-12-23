@@ -10,22 +10,26 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils"
+import { Home, MessageSquare, User } from "lucide-react"
 
-const components: { title: string; href: string; description: string }[] = [
+const components: { title: string; href: string; description: string; icon: React.ReactNode }[] = [
   {
     title: "Dashboard",
     href: "/dashboard",
     description: "View your personalized dashboard with recent activity and stats.",
+    icon: <Home className="w-4 h-4" />,
   },
   {
     title: "Profile",
     href: "/profile",
     description: "Manage your profile settings and personal information.",
+    icon: <User className="w-4 h-4" />,
   },
   {
     title: "Messages",
     href: "/messages",
     description: "Check your messages and communicate with others.",
+    icon: <MessageSquare className="w-4 h-4" />,
   },
 ]
 
@@ -35,6 +39,7 @@ export function MainNav() {
       <NavigationMenuList>
         <NavigationMenuItem>
           <Link to="/" className={navigationMenuTriggerStyle()}>
+            <Home className="w-4 h-4 mr-2" />
             Home
           </Link>
         </NavigationMenuItem>
@@ -48,6 +53,7 @@ export function MainNav() {
                   key={component.title}
                   title={component.title}
                   to={component.href}
+                  icon={component.icon}
                 >
                   {component.description}
                 </ListItem>
@@ -58,6 +64,7 @@ export function MainNav() {
 
         <NavigationMenuItem>
           <Link to="/dashboard" className={navigationMenuTriggerStyle()}>
+            <Home className="w-4 h-4 mr-2" />
             Dashboard
           </Link>
         </NavigationMenuItem>
@@ -68,8 +75,8 @@ export function MainNav() {
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { to: string }
->(({ className, title, children, to, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a"> & { to: string; title: string; icon?: React.ReactNode }
+>(({ className, title, children, to, icon, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -82,8 +89,11 @@ const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <div className="flex items-center text-sm font-medium leading-none">
+            {icon && <span className="mr-2">{icon}</span>}
+            {title}
+          </div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-1">
             {children}
           </p>
         </Link>
