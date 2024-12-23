@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { User, Calendar, MapPin, MessageSquare, Phone, Clock } from "lucide-react";
+import { User, Users, Heart, Male, Female, Couple } from "lucide-react";
 
 const categories = [
   {
@@ -7,29 +7,29 @@ const categories = [
     icon: User,
     subcategories: [
       {
-        name: "Scheduling",
-        icon: Calendar,
-        description: "Book appointments and manage your schedule"
+        name: "International",
+        icon: Users,
+        description: "Brazilian, Asian, British and other international escorts"
       },
       {
-        name: "Location-based",
-        icon: MapPin,
-        description: "Find services in your area"
+        name: "Adult Dating",
+        icon: Heart,
+        description: "Singles and couples dating services"
       },
       {
-        name: "Communication",
-        icon: MessageSquare,
-        description: "Direct messaging and contact options"
+        name: "Male Escorts",
+        icon: Male,
+        description: "Professional male escort services"
       },
       {
-        name: "Contact Methods",
-        icon: Phone,
-        description: "Various ways to get in touch"
+        name: "Female Escorts",
+        icon: Female,
+        description: "Professional female escort services"
       },
       {
-        name: "Availability",
-        icon: Clock,
-        description: "Check real-time availability"
+        name: "Couples",
+        icon: Couple,
+        description: "Services for couples and group activities"
       }
     ]
   }
