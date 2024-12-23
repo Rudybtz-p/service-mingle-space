@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,7 +10,9 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils"
-import { Home, MessageSquare, User } from "lucide-react"
+import { Home, MessageSquare, User, LogOut } from "lucide-react"
+import { supabase } from "@/integrations/supabase/client"
+import { toast } from "@/components/ui/use-toast"
 
 const components: { title: string; href: string; description: string; icon: React.ReactNode }[] = [
   {
@@ -34,6 +36,25 @@ const components: { title: string; href: string; description: string; icon: Reac
 ]
 
 export function MainNav() {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast({
+        title: "Logged out successfully",
+        description: "You have been logged out of your account.",
+      });
+      navigate("/login");
+    } catch (error) {
+      toast({
+        title: "Error logging out",
+        description: "There was a problem logging out. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <NavigationMenu className="max-w-2xl mx-auto">
       <NavigationMenuList>
@@ -67,6 +88,13 @@ export function MainNav() {
             <Home className="w-4 h-4 mr-2" />
             Dashboard
           </Link>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <button onClick={handleLogout} className={navigationMenuTriggerStyle()}>
+            <LogOut className="w-4 h-4 mr-2" />
+            Logout
+          </button>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
