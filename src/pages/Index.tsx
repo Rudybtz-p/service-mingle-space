@@ -3,6 +3,8 @@ import { CategorySection } from "@/components/CategorySection";
 import { ServiceCard } from "@/components/ServiceCard";
 import { SearchBar } from "@/components/SearchBar";
 import { HowItWorks } from "@/components/HowItWorks";
+import { Testimonials } from "@/components/Testimonials";
+import { Footer } from "@/components/Footer";
 
 const featuredServices = [
   {
@@ -45,6 +47,8 @@ const Index = () => {
           ))}
         </div>
       </section>
+      <Testimonials />
+      <Footer />
     </div>
   );
 };
