@@ -12,16 +12,23 @@ const Login = () => {
     if (!session) return;
 
     try {
+      console.log("Checking profile for user:", session.user.id);
       // Check if profile exists
-      const { data: profile } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', session.user.id)
         .single();
 
+      if (profileError) {
+        console.error('Error fetching profile:', profileError);
+        throw profileError;
+      }
+
       if (!profile) {
+        console.log("Creating new profile for user");
         // Create profile for new user
-        const { error: profileError } = await supabase
+        const { error: insertError } = await supabase
           .from('profiles')
           .insert([
             {
@@ -31,10 +38,9 @@ const Login = () => {
             }
           ]);
 
-        if (profileError) {
-          console.error('Error creating profile:', profileError);
-          toast.error('Error creating user profile');
-          return;
+        if (insertError) {
+          console.error('Error creating profile:', insertError);
+          throw insertError;
         }
         
         toast.success('Welcome! Your profile has been created.');
@@ -52,6 +58,7 @@ const Login = () => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
+        console.log("User already logged in:", session.user.id);
         await handleUserSession(session);
       }
     };
@@ -60,7 +67,7 @@ const Login = () => {
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log('Auth state changed:', event, session);
+      console.log('Auth state changed:', event, session?.user.id);
       if (session) {
         await handleUserSession(session);
       }
@@ -87,6 +94,14 @@ const Login = () => {
             },
           }}
           providers={[]}
+          onError={(error) => {
+            console.error('Auth error:', error);
+            if (error.message.includes('Invalid login credentials')) {
+              toast.error('Invalid email or password. Please try again.');
+            } else {
+              toast.error('An error occurred during login. Please try again.');
+            }
+          }}
         />
       </div>
     </div>
