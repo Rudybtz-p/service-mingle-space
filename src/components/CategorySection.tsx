@@ -7,6 +7,7 @@ const categories = [
   "Health & Wellness",
   "Events",
   "Tech Support",
+  "Escorting",
 ];
 
 export const CategorySection = () => {
