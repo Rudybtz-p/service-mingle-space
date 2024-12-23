@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { User, Users, Heart, Male, Female, Couple } from "lucide-react";
+import { User, Users, Heart, UserCircle2, UserCircle, UsersRound } from "lucide-react";
 
 const categories = [
   {
@@ -18,17 +18,17 @@ const categories = [
       },
       {
         name: "Male Escorts",
-        icon: Male,
+        icon: UserCircle2,
         description: "Professional male escort services"
       },
       {
         name: "Female Escorts",
-        icon: Female,
+        icon: UserCircle,
         description: "Professional female escort services"
       },
       {
         name: "Couples",
-        icon: Couple,
+        icon: UsersRound,
         description: "Services for couples and group activities"
       }
     ]
