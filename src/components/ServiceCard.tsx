@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { UserTypeIndicator } from "./UserTypeIndicator";
 
 interface ServiceCardProps {
   title: string;
@@ -7,9 +8,17 @@ interface ServiceCardProps {
   category: string;
   price: string;
   provider: string;
+  providerType?: string;
 }
 
-export const ServiceCard = ({ title, description, category, price, provider }: ServiceCardProps) => {
+export const ServiceCard = ({ 
+  title, 
+  description, 
+  category, 
+  price, 
+  provider,
+  providerType = "provider" 
+}: ServiceCardProps) => {
   return (
     <Card className="hover:animate-card-hover transition-all cursor-pointer">
       <CardHeader>
@@ -23,8 +32,11 @@ export const ServiceCard = ({ title, description, category, price, provider }: S
       </CardHeader>
       <CardContent>
         <CardDescription className="mb-4">{description}</CardDescription>
-        <div className="text-sm text-gray-500">
-          Offered by <span className="font-medium text-primary">{provider}</span>
+        <div className="flex items-center justify-between">
+          <div className="text-sm text-gray-500">
+            Offered by <span className="font-medium text-primary">{provider}</span>
+          </div>
+          <UserTypeIndicator userType={providerType} />
         </div>
       </CardContent>
     </Card>

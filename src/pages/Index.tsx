@@ -15,6 +15,7 @@ const featuredServices = [
     category: "Home Services",
     price: "$25/hr",
     provider: "Clean & Shine Co.",
+    providerType: "provider"
   },
   {
     title: "Personal Fitness Training",
@@ -22,6 +23,7 @@ const featuredServices = [
     category: "Health & Wellness",
     price: "$40/session",
     provider: "FitLife Pro",
+    providerType: "provider"
   },
   {
     title: "Math Tutoring",
@@ -29,6 +31,7 @@ const featuredServices = [
     category: "Education",
     price: "$30/hr",
     provider: "MathMasters",
+    providerType: "provider"
   },
   {
     title: "International Companion",
@@ -36,6 +39,7 @@ const featuredServices = [
     category: "International",
     price: "$200/hr",
     provider: "Global Elite",
+    providerType: "provider"
   },
   {
     title: "Luxury Date Experience",
@@ -43,6 +47,7 @@ const featuredServices = [
     category: "Dating",
     price: "$300/hr",
     provider: "Premium Dating Co.",
+    providerType: "provider"
   },
   {
     title: "Travel Companion",
@@ -50,6 +55,7 @@ const featuredServices = [
     category: "Travel",
     price: "$250/hr",
     provider: "Elite Travel Companions",
+    providerType: "provider"
   },
 ];
 
