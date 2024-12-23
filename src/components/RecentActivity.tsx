@@ -1,12 +1,13 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { MessageSquare } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const RecentActivity = () => {
-  const { data: recentMessages } = useQuery({
-    queryKey: ["recent-messages"],
+export const RecentActivity = () => {
+  const { data: activities, isLoading } = useQuery({
+    queryKey: ["recent-activities"],
     queryFn: async () => {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("messages")
         .select(`
           content,
@@ -16,26 +17,47 @@ const RecentActivity = () => {
         `)
         .order("created_at", { ascending: false })
         .limit(5);
+
+      if (error) {
+        console.error("Error fetching recent activities:", error);
+        throw error;
+      }
+
       return data;
     },
   });
 
+  if (isLoading) {
+    return <div>Loading recent activities...</div>;
+  }
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Recent Activity</CardTitle>
+        <CardTitle className="flex items-center gap-2">
+          <MessageSquare className="h-5 w-5" />
+          Recent Activities
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {recentMessages?.map((message, index) => (
-            <div key={index} className="flex items-center space-x-4">
-              <div className="space-y-1">
-                <p className="text-sm font-medium">
-                  {message.sender?.username} → {message.receiver?.username}
+          {activities?.map((activity, index) => (
+            <div key={index} className="flex items-start gap-4">
+              <div className="rounded-full bg-primary/10 p-2">
+                <MessageSquare className="h-4 w-4 text-primary" />
+              </div>
+              <div>
+                <p className="text-sm">
+                  <span className="font-medium text-primary">
+                    {activity.sender?.username}
+                  </span>{" "}
+                  sent a message to{" "}
+                  <span className="font-medium text-primary">
+                    {activity.receiver?.username}
+                  </span>
                 </p>
-                <p className="text-sm text-muted-foreground">{message.content}</p>
                 <p className="text-xs text-muted-foreground">
-                  {new Date(message.created_at).toLocaleDateString()}
+                  {new Date(activity.created_at).toLocaleDateString()}
                 </p>
               </div>
             </div>
@@ -45,5 +67,3 @@ const RecentActivity = () => {
     </Card>
   );
 };
-
-export default RecentActivity;
