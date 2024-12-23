@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { LayoutDashboard, Users, MessageSquare, Calendar } from "lucide-react";
 import DashboardStats from "@/components/DashboardStats";
-import RecentActivity from "@/components/RecentActivity";
+import { RecentActivity } from "@/components/RecentActivity";
 
 const Dashboard = () => {
   const navigate = useNavigate();
