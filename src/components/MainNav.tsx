@@ -10,9 +10,10 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils"
-import { Home, MessageSquare, User, LogOut } from "lucide-react"
+import { Home, MessageSquare, User, LogOut, Shield } from "lucide-react"
 import { supabase } from "@/integrations/supabase/client"
 import { toast } from "@/components/ui/use-toast"
+import { useEffect, useState } from "react"
 
 const components: { title: string; href: string; description: string; icon: React.ReactNode }[] = [
   {
@@ -37,6 +38,24 @@ const components: { title: string; href: string; description: string; icon: Reac
 
 export function MainNav() {
   const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('user_type')
+          .eq('id', session.user.id)
+          .single();
+        
+        setIsAdmin(profile?.user_type === 'admin');
+      }
+    };
+
+    checkAdminStatus();
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -89,6 +108,15 @@ export function MainNav() {
             Dashboard
           </Link>
         </NavigationMenuItem>
+
+        {isAdmin && (
+          <NavigationMenuItem>
+            <Link to="/admin" className={navigationMenuTriggerStyle()}>
+              <Shield className="w-4 h-4 mr-2" />
+              Admin
+            </Link>
+          </NavigationMenuItem>
+        )}
 
         <NavigationMenuItem>
           <button onClick={handleLogout} className={navigationMenuTriggerStyle()}>
