@@ -7,7 +7,6 @@ import { Testimonials } from "@/components/Testimonials";
 import { Footer } from "@/components/Footer";
 import { ProfileContactOptions } from "@/components/ProfileContactOptions";
 import { toast } from "@/components/ui/use-toast";
-import { MainNav } from "@/components/MainNav";
 
 const featuredServices = [
   {
@@ -84,11 +83,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <div className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container py-3">
-          <MainNav />
-        </div>
-      </div>
       <HeroSection />
       <div className="container -mt-8 relative z-10 mb-12">
         <SearchBar />
